@@ -63,13 +63,13 @@ body {
 }
 
 #neko_left {
-  margin-left: 40px;
+  margin-left: 60px;
 }
 
 .point_board {
   list-style: none;
   background-color: white;
-  width: 190px;
+  width: 210px;
   padding-left: 10px;
   display: flex;
   flex-direction: column;
@@ -77,7 +77,7 @@ body {
 
 .point_board p {
   margin: 0;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .point {
