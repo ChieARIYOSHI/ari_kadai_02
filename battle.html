@@ -96,8 +96,6 @@
     <script>
       $('#choki').on('click', function () {
         //ここに自分の処理を追加
-        // const min = 0;
-        // const max = 2;
         const randomnumber = Math.floor(Math.random()*(max-min+1)) +min;
         console.log(randomnumber);
         if(randomnumber == 0) {
@@ -134,8 +132,6 @@
     <script>
       $('#pa').on('click', function () {
         //ここに自分の処理を追加
-        // const min = 0;
-        // const max = 2;
         const randomnumber = Math.floor(Math.random()*(max-min+1)) +min;
         console.log(randomnumber);
         if(randomnumber == 0) {
@@ -167,6 +163,12 @@
           $('#pa').css('opacity', 1);
         }
       });
+    </script>
+
+    <script>
+      if(user_initial >= 50) {
+        $().show()
+      }
     </script>
 
   </body>
