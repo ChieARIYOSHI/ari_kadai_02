@@ -10,6 +10,7 @@
   
   <body>
     <header>
+      <!-- 画面右上にそれぞれの点数を表示 -->
       <div class="score_board">
         <div class="user_points">
           <p>あなたの点数： </p>
@@ -26,16 +27,17 @@
 
     <div class="main">
       <div id="neko">
-        <img id="neko_left" src="img/test_1.png" width=160 height=160>
+        <img id="neko_left" src="img/test_1.png" width=160 height=160> <!--猫のグーチョキパーを表示するスペース-->
         <img id="neko_center" src="img/janken_pon.png" width=340 height=300 alt="猫のイラスト">
         <ul class="point_board">
+          <!-- 参考までに勝った時の加算得点表を標記 -->
           <li class="point"><img src="img/gu.png" width=36 height=36 alt="グーのイラスト"><p id="gu_word">グリコ（３点）</p></li>
           <li class="point"><img src="img/choki.png" width=36 height=36 alt="チョキのイラスト"><p id="choki_word">チヨコレート（６点）</p></li>
           <li class="point"><img src="img/pa.png" width=36 height=36 alt="パーのイラスト"><p id="pa_word">パイナツプル（６点）</p></li>
         </ul>
       </div>
-
-      <p id="kekka">ネコちゃんとじゃんけん勝負！</p>
+      
+      <p id="kekka">ネコちゃんとじゃんけん勝負！</p><!--勝負の結果を標記する場所-->
       
       <div class="gu_choki_pa">
         <li id="gu" href=""><img src="img/gu.png" width=160 height=160 alt="グーのイラスト"></li>
@@ -48,46 +50,56 @@
       <p>copyrights 2020 Arilyn Inc. All Rights Reserved.</p>
     </footer>
 
+    <!--ここからjavascript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
+      //まずは、定数と変数を定義
         const min = 0;
         const max = 2;
-        let user_initial = 0;
-        let neko_initial = 0;
-        const gu_add = 3;
-        const choki_add = 6;
-        const pa_add = 6;
+        let user_initial = 0; //最初のユーザーと得点＝０点
+        let neko_initial = 0; //最初の猫ちゃんの得点＝０点
+        const gu_add = 3; //グーで勝った時の追加得点
+        const choki_add = 6; //チョキで勝った時の追加得点
+        const pa_add = 6; //パーで勝った時の追加得点
 
       $('#gu').on('click', function () {
-        //ここに自分の処理を追加
-        const randomnumber = Math.floor(Math.random()*(max-min+1)) +min;
+        //ユーザーがグーを選んだ場合。
+        const randomnumber = Math.floor(Math.random()*(max-min+1)) +min; //ランダムで0(勝ち),1(負け),2(あいこ)をそれぞれ1/3の確率で出すように設定
         console.log(randomnumber);
         if(randomnumber == 0) {
           $('#kekka').html('やったー！あなたの勝ち');
-          $('#neko_center').attr('src', 'img/you_win.png');
-          $('#neko_left').attr('src', 'img/neko_choki.png');
+          $('#neko_center').attr('src', 'img/you_win.png'); //猫がガッカリしたイラストに差し替え
+          $('#neko_left').attr('src', 'img/neko_choki.png'); //猫のチョキのイラスト挿入
           $('#gu').css('opacity', 1);
-          $('#choki').fadeTo(200,0.5);
+          $('#choki').fadeTo(200,0.5); //グー以外の2つは色のトーンを落とす
           $('#pa').fadeTo(200,0.5);
-          let user_sum = user_initial += gu_add;
+          let user_sum = user_initial += gu_add; //ユーザーに3点を加算
           // console.log(user_sum);
-          $('#user_total').html(user_sum);       
+          $('#user_total').html(user_sum); //画面右上の得点表に加算得点を反映
+          if( user_sum >= 20 ) { //合計得点が20点に達したらゲーム終了
+            alert('おめでとう！あなたの勝利〜！！');
+            location.href = 'finale.html';
+          }
         } else if(randomnumber == 1) {
           $('#kekka').html('残念・・あなたの負け');
-          $('#neko_center').attr('src', 'img/you_lose.png');
-          $('#neko_left').attr('src', 'img/neko_pa.png');
+          $('#neko_center').attr('src', 'img/you_lose.png'); //猫が喜んでいるイラストに差し替え
+          $('#neko_left').attr('src', 'img/neko_pa.png'); //猫のパーのイラスト挿入
           $('#gu').css('opacity', 1);
-          $('#choki').fadeTo(200,0.5);
+          $('#choki').fadeTo(200,0.5); //グー以外の2つは色のトーンを落とす
           $('#pa').fadeTo(200,0.5);
-          let neko_sum = neko_initial += gu_add;
+          let neko_sum = neko_initial += gu_add; //猫に3点を加算
           // console.log(neko_sum);
-          $('#neko_total').html(neko_sum);
+          $('#neko_total').html(neko_sum); //画面右上の得点表に加算得点を反映
+          if( neko_sum >= 20 ) { //合計得点が20点に達したらゲーム終了
+            alert('残念・・・あなたの負けです。');
+            location.href = 'finale.html';
+          }
         } else {
           $('#kekka').html('あいこ。引き分け〜');
-          $('#neko_center').attr('src', 'img/janken_pon.png');
-          $('#neko_left').attr('src', 'img/neko_gu.png');
+          $('#neko_center').attr('src', 'img/janken_pon.png'); //猫のイラスト（初期設定）に戻す
+          $('#neko_left').attr('src', 'img/neko_gu.png'); //猫のグーのイラスト挿入
           $('#gu').css('opacity', 1);
-          $('#choki').fadeTo(200,0.5);
+          $('#choki').fadeTo(200,0.5); //グー以外の2つは色のトーンを落とす
           $('#pa').fadeTo(200,0.5);
         }
       });
@@ -107,7 +119,11 @@
           $('#pa').fadeTo(200,0.5);
           let user_sum = user_initial += choki_add;
           // console.log(user_sum);
-          $('#user_total').html(user_sum);  
+          $('#user_total').html(user_sum);
+          if( user_sum >= 20 ) {
+            alert('おめでとう！あなたの勝利〜！！');
+            location.href = 'finale.html';
+          }
         } else if(randomnumber == 1) {
           $('#kekka').html('残念・・あなたの負け');
           $('#neko_center').attr('src', 'img/you_lose.png');
@@ -118,6 +134,10 @@
           let neko_sum = neko_initial += choki_add;
           // console.log(neko_sum);
           $('#neko_total').html(neko_sum);
+          if( neko_sum >= 20 ) {
+            alert('残念・・・あなたの負けです。');
+            location.href = 'finale.html';
+          }
         } else {
           $('#kekka').html('あいこ。引き分け〜');
           $('#neko_center').attr('src', 'img/janken_pon.png');
@@ -144,6 +164,10 @@
           let user_sum = user_initial += choki_add;
           // console.log(user_sum);
           $('#user_total').html(user_sum);
+          if( user_sum >= 20 ) {
+            alert('おめでとう！あなたの勝利〜！！');
+            location.href = 'finale.html';
+          }
         } else if(randomnumber == 1) {
           $('#kekka').html('残念・・あなたの負け');
           $('#neko_center').attr('src', 'img/you_lose.png');
@@ -154,6 +178,10 @@
           let neko_sum = neko_initial += pa_add;
           // console.log(neko_sum);
           $('#neko_total').html(neko_sum);
+          if( neko_sum >= 20 ) {
+            alert('残念・・・あなたの負けです。');
+            location.href = 'finale.html';
+          }
         } else {
           $('#kekka').html('あいこ。引き分け〜');
           $('#neko_center').attr('src', 'img/janken_pon.png');
@@ -163,12 +191,6 @@
           $('#pa').css('opacity', 1);
         }
       });
-    </script>
-
-    <script>
-      if(user_initial >= 50) {
-        $().show()
-      }
     </script>
 
   </body>

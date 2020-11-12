@@ -1,0 +1,38 @@
+body {
+  background-color: rgb(77, 77, 77);
+  color: aliceblue;
+  font-size: 24px;
+  font-weight: bolder;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
+
+.lets_start {
+  height: 160px;
+  display: flex;
+justify-content: center;
+align-items: center; 
+}
+
+.start_btn {
+  font-weight: bold;
+width: 300px;
+  height: 60px;
+border-radius: 6px;
+text-align: center;
+background-color: mistyrose;
+display: flex;
+justify-content: center;
+  align-items: center;
+}
+
+.start_text {
+  text-decoration: none;
+  color: rosybrown;
+  font-size: 24px;
+  font-weight: bolder;
+}
